@@ -2,7 +2,7 @@ name: Daily Merge Main into Develop
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # This will run the workflow daily at midnight UTC
+    - cron: '* * * * *'  # This will run the workflow daily at midnight UTC
   workflow_dispatch:  # This allows the workflow to be trigg
 
 jobs:
