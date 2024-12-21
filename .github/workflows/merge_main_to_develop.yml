@@ -1,7 +1,9 @@
 name: Daily Merge Main into Develop
 
 on:
-  workflow_dispatch
+  schedule:
+    - cron: '0 0 * * *'  # This will run the workflow daily at midnight UTC
+  workflow_dispatch:  # This allows the workflow to be trigg
 
 jobs:
   merge:
@@ -9,12 +11,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: develop
 
-      - name: Merge main into develop
+      - name: Merge Main to Develop
         run: |
-          git pull --all
-          git checkout develop
-          git merge main
+          git pull -all
+          git merge main 
+    
+      - name: Push Changes
+        run: |
           git push origin develop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
