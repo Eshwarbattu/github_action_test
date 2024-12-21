@@ -16,7 +16,7 @@ jobs:
 
       - name: Merge Main to Develop
         run: |
-          git pull -all
+          git pull --all
           git merge main 
     
       - name: Push Changes
