@@ -16,6 +16,7 @@ jobs:
 
       - name: Merge Main to Develop
         run: |
+          echo '{github.ref}'
           git pull --all
           git merge main 
     
