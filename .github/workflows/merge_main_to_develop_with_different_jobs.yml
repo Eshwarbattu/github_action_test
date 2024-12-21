@@ -24,9 +24,7 @@ jobs:
       - name: Create Pull Request from Main to Develop
         id: create_pr
         run: |
-          pr_url=$(gh pr create --title "Daily Merge: Main into Develop" --body "This is an automated pull request to merge changes from main into develop." --head main --base develop --json url --jq '.url')
-          echo "Pull request created: $pr_url"
-          echo "::set-output name=pr_url::$pr_url"
+          gh pr create --title "Daily Merge: Main into Develop" --body "This is an automated pull request to merge changes from main into develop." --head main --base develop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,7 +36,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       - name: Approve Pull Request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
