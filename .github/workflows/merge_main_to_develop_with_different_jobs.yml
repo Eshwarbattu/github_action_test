@@ -24,20 +24,14 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get install -y gh
 
-      - name: Authenticate GitHub CLI with GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-
       - name: Create Pull Request from Main to Develop
         id: create_pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pr_url=$(gh pr create --title "Daily Merge: Main into Develop" --body "This is an automated pull request to merge changes from main into develop." --head main --base develop --json url --jq '.url')
           echo "Pull request created: $pr_url"
           echo "::set-output name=pr_url::$pr_url"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   approve_pr:
     runs-on: ubuntu-latest
@@ -45,12 +39,6 @@ jobs:
     steps:
       - name: Install GitHub CLI
         run: sudo apt-get install -y gh
-
-      - name: Authenticate GitHub CLI with GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Approve Pull Request
         env:
