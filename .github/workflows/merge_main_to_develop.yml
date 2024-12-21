@@ -2,7 +2,7 @@ name: Daily Merge Main into Develop
 
 on:
   schedule:
-    - cron: '* * * * *'  # This will run the workflow daily at midnight UTC
+    - cron: "* * * * *"  # This will run the workflow daily at midnight UTC
 
 
 jobs:
