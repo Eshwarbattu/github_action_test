@@ -20,6 +20,12 @@ jobs:
           git pull --all
           git checkout develop
           git merge main 
+
+      - name: Create Pull Request from Main to Develop
+        run: |
+          gh pr create --base develop --head main --title "Daily Merge: Main to Develop" --body "Automated pull request to merge changes from main to develop"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
       - name: Push Changes
         run: |
