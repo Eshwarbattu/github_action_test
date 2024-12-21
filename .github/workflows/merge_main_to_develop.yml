@@ -18,6 +18,7 @@ jobs:
         run: |
           echo "Current branch is ${GITHUB_REF##*/}"
           git pull --all
+          git checkout develop
           git merge main 
     
       - name: Push Changes
