@@ -16,7 +16,7 @@ jobs:
 
       - name: Merge Main to Develop
         run: |
-          echo 'Current branch is ${{ env.GITHUB_REF }}'
+          echo 'Current branch is ${GITHUB_REF##*/}'
           git pull --all
           git merge main 
     
